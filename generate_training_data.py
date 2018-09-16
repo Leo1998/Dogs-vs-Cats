@@ -6,7 +6,7 @@ import random
 DATADIR = "C:/Users/Gott/Desktop/NN_Hacking/keras/dogsncats/PetImages"
 CATEGORIES = ["Dog", "Cat"]
 
-IMG_SIZE=50
+IMG_SIZE=100
 
 training_data = []
 
@@ -17,7 +17,7 @@ def create_training_data():
 		
 		for img in os.listdir(path):
 			try:
-				img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
+				img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_COLOR)
 				new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
 				training_data.append([new_array, class_idx])
 			except Exception as e:
@@ -34,7 +34,7 @@ for features, label in training_data:
 	X.append(features)
 	Y.append(label)
 
-X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
+X = np.array(X).reshape(-1, IMG_SIZE, IMG_SIZE, 3)
 Y = np.array(Y).reshape(-1)
 
 print(X.shape)
